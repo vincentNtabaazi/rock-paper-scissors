@@ -1,33 +1,36 @@
+const rock = document.querySelector(".rock")
+const paper = document.querySelector(".paper")
+const scissor = document.querySelector(".scissor")
+
+rock.addEventListener("click", func1);
+paper.addEventListener("click", func1);
+scissor.addEventListener("click", func1);
+
+function func1(e) {
+  let param = e.target.className
+  // console.log(param)
+  playGame(param)
+}
+
 function getComputerChoice() {
   let value = Math.random()
-  if (value >= 0 && value <= 0.33){
+  if (value >= 0 && value <= 0.33) {
     return 'rock'
   }
-  else if (value > 0.33 && value <= 0.66){
+  else if (value > 0.33 && value <= 0.66) {
     return 'paper'
   }
-  else if (value > 0.66 && value <= 1){
+  else if (value > 0.66 && value <= 1) {
     return 'scissor'
   }
 }
 
-
-function runTheGame(playerSelection){
-  if(playerSelection === null || playerSelection.trim() === ""){
-    alert("You need an input to play the game")
-    return false
-  }
-  return true
-}
-
-
 function singleRound(computerSelection, playerSelection) {
-  while (runTheGame(playerSelection)) {
     playerSelection = playerSelection.toLowerCase()
     let choice = ["rock", "paper", "scissor"]
-    if (!choice.includes(playerSelection)) {
-      playerSelection = prompt("What's your choice?")
-    }
+    // if (!choice.includes(playerSelection)) {
+    //   playerSelection = prompt("What's your choice?")
+    // }
     if (computerSelection === playerSelection) {
       console.log(`The computer selection: ${computerSelection}`)
       return "It is a tie"
@@ -57,40 +60,36 @@ function singleRound(computerSelection, playerSelection) {
         return "You Lose! Scissor beats paper"
       }
     }
-  }
 }
 
 
 
-function playGame() {
+function playGame(playerChoice) {
   let computerWins = 0
   let playerWins = 0
-  for (i = 0; i < 5; i++) {
-    let playerSelection = prompt("What's your choice")
-    const computerSelection = getComputerChoice()
-    let result = singleRound(computerSelection, playerSelection)
-    console.log(result)
-    let statusW = "Win"
-    let statusL = "Lose"
-    if (result !== undefined){
-      if(result.indexOf(statusW) != -1){
-        playerWins += 1
-      } else if (result.indexOf(statusL) != -1){
-        computerWins += 1
-      }
+  let playerSelection = playerChoice
+  const computerSelection = getComputerChoice()
+  let result = singleRound(computerSelection, playerSelection)
+  console.log(result)
+  let statusW = "Win"
+  let statusL = "Lose"
+  if (result !== undefined) {
+    if (result.indexOf(statusW) != -1) {
+      playerWins += 1
+    } else if (result.indexOf(statusL) != -1) {
+      computerWins += 1
     }
   }
-  if (playerWins > computerWins){
+
+  if (playerWins > computerWins) {
     console.log(`The player got ${playerWins - computerWins} more wins than the computer.`)
-  } else if (playerWins < computerWins){
+  } else if (playerWins < computerWins) {
     console.log(`The computer got ${computerWins - playerWins} more wins than the player.`)
   } else {
-    if (playerWins == 0 && computerWins == 0){
+    if (playerWins == 0 && computerWins == 0) {
       console.log("The game was not played.")
     } else {
       console.log("It is a tie.")
     }
   }
 }
-
-playGame()
