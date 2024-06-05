@@ -62,11 +62,7 @@ function singleRound(computerSelection, playerSelection) {
     }
 }
 
-
-
 function playGame(playerChoice) {
-  let computerWins = 0
-  let playerWins = 0
   let playerSelection = playerChoice
   const computerSelection = getComputerChoice()
   let result = singleRound(computerSelection, playerSelection)
